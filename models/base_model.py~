@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+"""Base Model"""
+
+import models
+import json
+import uuid
+from datetime import datetime
+
+class BaseModel:
+    """
+    defines all common attributes/methods for other classes
+    """
+    def __init__(self, *args, **kwargs):
+        """
+        public instance attributes
+        """
+        timeFormat = "%Y-%m-%dT%H:%M:%S.%f"
+        if kwargs:
+            for key, value in kwargs.items():
+                if key is not "__class__":
+                    setattr(self, key, value)
+    def __str__(self):
+        """
+        returns a string representation of the BaseModel instance
+        """
+        className = self.__class__.__name__
+        return "[{:s}] ({:s}) {}".format(className, self.id, self.__dict__)
